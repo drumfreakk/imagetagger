@@ -2,3 +2,5 @@ Add verification of new registered images
 Add methods to get names descriptions etc
 Add method to check for new images, and prompt to register the images
 Add method to give full path to image based on id
+Add table for tag descriptions
+Add setup script/program
