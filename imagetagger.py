@@ -2,8 +2,8 @@ import mariadb
 
 
 class ImageTagger:
-	def __init__(self):
-		self.conn = mariadb.connect(user="ehbot", password="Tpeys9NRs9RqXIexaJhu", database="ehbot", host="localhost")
+	def __init__(self, password):
+		self.conn = mariadb.connect(user="ehbot", password=password, database="ehbot", host="localhost")
 		self.cursor = self.conn.cursor()
 		self.path = "/sftp/nas/upload/eh/pics/"
 
@@ -49,14 +49,12 @@ class ImageTagger:
 	def getSet(self, setId):
 		self.cursor.execute("SELECT id, path, setId, setNo FROM imagetags WHERE setId = ?", (setId,))
 		return self.cursor.fetchall()
-	
 
-it = ImageTagger()
-
+fd = open("password", "r")
+it = ImageTagger(fd.read()[:-1])
+fd.close()
 images = it.getImageOptions(it.strToTags("")) 
-
 print(it.getSet(1))
-
 it.close()
 
 
